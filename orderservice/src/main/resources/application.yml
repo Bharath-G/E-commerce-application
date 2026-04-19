@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: orderservice
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: system
+    password: system123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    # Custom Dialect Configuration - Explicitly setting this prevents Hibernate from attempting
+    # to query the database metadata on startup just to determine the dialect.
+    database-platform: org.hibernate.dialect.OracleDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+###---Kafka dependencies---###
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.JsonSerializer
+      acks: all #wait for all replicas -don't lose data
+      retries: 3
+      properties:
+        enable.idempotence: true #deduplicate retries - always enable this
+
+
+
+server:
+  port: 8084
+
+# Note: If your local Oracle SID is different (like ORCLPDB1 or FREE), change 'XE' to your SID.
+
+# Logging Configuration
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - [%X{correlationId}] - [%X{orderId}] - %msg%n"
+
+
+
