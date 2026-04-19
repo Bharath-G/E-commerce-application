@@ -15,6 +15,7 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -31,3 +32,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+**/target/**
+**/.idea/**
+/.vscode/
+**/src/main/**/target/
+**/src/test/**/target/
