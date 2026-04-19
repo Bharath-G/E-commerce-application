@@ -216,5 +216,4 @@ This service demonstrates:
 * JPA-based persistence
 * Scalable backend architecture
 
-<img width="1536" height="1024" alt="E-Commerce Microservice architecture" src="https://github.com/user-attachments/assets/6771bee2-b1f6-41c8-81ee-d9848c9c4911" />
-
+![E-Commerce Microservice architecture.png](E-Commerce%20Microservice%20architecture.png)
