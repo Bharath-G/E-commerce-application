@@ -1,7 +1,7 @@
 package com.learning.orderservice.service;
 
 
-import com.learning.orderservice.model.OrderEvent;
+import com.learning.events.OrderEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -15,7 +15,7 @@ public class OrderEventProducer {
 
     public void publishOrderCreated(OrderEvent orderEvent){
         kafkaTemplate
-                .send("order-event",orderEvent.orderId(), orderEvent)
+                .send("order-events",orderEvent.orderId(), orderEvent)
                 .whenComplete((result, ex)->{
                     if(ex != null){
                         log.error("Failed to send order {}: {}", orderEvent.orderId(), ex.getMessage());

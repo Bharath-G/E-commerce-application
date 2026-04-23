@@ -1,9 +1,7 @@
 package com.learning.orderservice.controller;
 
-import com.learning.orderservice.model.OrderEvent;
 import com.learning.orderservice.model.OrderRequest;
 import com.learning.orderservice.model.OrderResponse;
-import com.learning.orderservice.service.OrderEventProducer;
 import com.learning.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

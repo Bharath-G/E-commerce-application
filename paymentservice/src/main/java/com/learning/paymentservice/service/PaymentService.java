@@ -1,6 +1,6 @@
 package com.learning.paymentservice.service;
 
-import com.learning.paymentservice.model.OrderEvent;
+import com.learning.events.OrderEvent;
 import org.springframework.stereotype.Service;
 
 @Service

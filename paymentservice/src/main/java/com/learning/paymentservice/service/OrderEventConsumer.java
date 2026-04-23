@@ -1,7 +1,7 @@
 package com.learning.paymentservice.service;
 
-import com.learning.paymentservice.model.OrderEvent;
-import com.learning.paymentservice.model.PaymentEvent;
+import com.learning.events.OrderEvent;
+import com.learning.events.PaymentEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

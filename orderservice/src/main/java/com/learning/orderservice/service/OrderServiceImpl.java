@@ -5,7 +5,7 @@ import com.learning.orderservice.entity.OrderDetails;
 import com.learning.orderservice.mapper.CustomerDetailsMapper;
 import com.learning.orderservice.mapper.OrderDetailsMapper;
 import com.learning.orderservice.model.CustomerDetailsRequest;
-import com.learning.orderservice.model.OrderEvent;
+import com.learning.events.OrderEvent;
 import com.learning.orderservice.model.OrderRequest;
 import com.learning.orderservice.model.OrderResponse;
 import com.learning.orderservice.repository.CustomerDetailsRepository;

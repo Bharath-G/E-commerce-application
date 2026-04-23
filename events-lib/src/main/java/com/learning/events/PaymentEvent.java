@@ -1,7 +1,5 @@
-package com.learning.paymentservice.model;
+package com.learning.events;
 
-// events/PaymentEvent.java
-// This is the event Payment Service PRODUCES for Notification Service
 public record PaymentEvent(
     String paymentId,
     String orderId,

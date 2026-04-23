@@ -1,6 +1,6 @@
 package com.learning.paymentservice.service;
 
-import com.learning.paymentservice.model.OrderEvent;
+import com.learning.events.OrderEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

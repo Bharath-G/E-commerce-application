@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: notificationservice
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: system
+    password: system123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.OracleDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.learning.events"
+
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+
+server:
+  port: 8083
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - [%X{correlationId}] - [%X{orderId}] - %msg%n"
+
+
+

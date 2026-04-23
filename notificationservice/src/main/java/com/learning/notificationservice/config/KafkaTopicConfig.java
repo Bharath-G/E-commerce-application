@@ -1,4 +1,4 @@
-package com.learning.orderservice.config;
+package com.learning.notificationservice.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.config.TopicConfig;
@@ -9,13 +9,14 @@ import org.springframework.kafka.config.TopicBuilder;
 @Configuration
 public class KafkaTopicConfig {
 
-    // Order Service owns this topic — it produces to it
+    // Notification Service just consumes payment-events.
+    // It creates its own DLT.
     @Bean
-    public NewTopic orderEventsTopic() {
-        return TopicBuilder.name("order-events")
-            .partitions(6)
+    public NewTopic paymentEventsDlt() {
+        return TopicBuilder.name("payment-events.DLT")
+            .partitions(1)
             .replicas(1)
-            .config(TopicConfig.RETENTION_MS_CONFIG, "604800000") // 7 days
+            .config(TopicConfig.RETENTION_MS_CONFIG, "2592000000") // 30 days
             .build();
     }
 }
