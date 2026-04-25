@@ -4,6 +4,8 @@ services:
     container_name: kafka-kraft
     ports:
       - "9092:9092"
+#number on the right side of the colon is port number on which kafka broker is running inside Docker container
+#number on the left side of the colon is port number on which kafka broker will be available on the host machine
     environment:
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_NODE_ID: 1

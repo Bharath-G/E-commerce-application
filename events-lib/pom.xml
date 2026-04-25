@@ -24,10 +24,12 @@
             serialized/deserialized by Spring Kafka's JsonSerializer /
             JsonDeserializer without any extra configuration.
         -->
+        <!-- Source: https://mvnrepository.com/artifact/tools.jackson.core/jackson-databind -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
+            <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.18.3</version>
+            <version>3.1.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
