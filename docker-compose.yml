@@ -1,11 +1,23 @@
 services:
+  # --- Infrastructure ---
+  oracle-db:
+    image: gvenzl/oracle-xe
+    container_name: oracle-db
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: system123
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   kafka-kraft:
     image: apache/kafka:3.7.0
     container_name: kafka-kraft
     ports:
       - "9092:9092"
-#number on the right side of the colon is port number on which kafka broker is running inside Docker container
-#number on the left side of the colon is port number on which kafka broker will be available on the host machine
     environment:
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_NODE_ID: 1
@@ -16,37 +28,57 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
 
+  # --- Config Server ---
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    environment:
+      ENCRYPT_KEY: MySecretMasterKey123
+    volumes:
+      - ./config-repo:/config-repo
+    # Override search location for Docker
+    command: ["java", "-jar", "/app.jar", "--spring.cloud.config.server.git.uri=file:///config-repo"]
+
+  # --- Microservices ---
   order-service:
-    image: localhost:5000/order-service:latest   # ← pulls from YOUR local registry
+    build: ./orderservice
     container_name: order-service
     ports:
       - "8081:8081"
     environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-kraft:29092
+      SPRING_CONFIG_IMPORT: "configserver:http://config-server:8888/"
     depends_on:
-      - kafka-kraft
+      config-server:
+        condition: service_started
+      oracle-db:
+        condition: service_healthy
 
   payment-service:
-    image: localhost:5000/payment-service:latest
+    build: ./paymentservice
     container_name: payment-service
     ports:
       - "8082:8082"
     environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-kraft:29092
+      SPRING_CONFIG_IMPORT: "configserver:http://config-server:8888/"
     depends_on:
-      - kafka-kraft
+      config-server:
+        condition: service_started
+      oracle-db:
+        condition: service_healthy
 
   notification-service:
-    image: localhost:5000/notification-service:latest
+    build: ./notificationservice
     container_name: notification-service
     ports:
       - "8083:8083"
     environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-kraft:29092
+      SPRING_CONFIG_IMPORT: "configserver:http://config-server:8888/"
     depends_on:
-      - kafka-kraft
+      config-server:
+        condition: service_started
+      oracle-db:
+        condition: service_healthy

@@ -1,55 +1,8 @@
 spring:
   application:
     name: paymentservice
-  datasource:
-    url: jdbc:oracle:thin:@localhost:1521:XE
-    username: system
-    password: system123
-  jpa:
-    hibernate:
-      ddl-auto: update
-    # Custom Dialect Configuration - Explicitly setting this prevents Hibernate from attempting
-    # to query the database metadata on startup just to determine the dialect.
-    database-platform: org.hibernate.dialect.OracleDialect
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-    ###---Kafka dependencies---###
-  kafka:
-    bootstrap-servers: localhost:9092   # overridden to kafka-kraft:9092 in docker
-
-    # Payment Service CONSUMES from order-events
-    consumer:
-      group-id: payment-service
-      auto-offset-reset: earliest
-      enable-auto-commit: false
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "com.learning.events"
-
-    # Payment Service PRODUCES to payment-events
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      acks: all
-      retries: 3
-      properties:
-        enable.idempotence: true
-
-    listener:
-      ack-mode: MANUAL_IMMEDIATE
-
-server:
-  port: 8082
-
-# Note: If your local Oracle SID is different (like ORCLPDB1 or FREE), change 'XE' to your SID.
-
-# Logging Configuration
-logging:
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - [%X{correlationId}] - [%X{orderId}] - %msg%n"
+  config:
+    import: "optional:configserver:http://localhost:8888/"
 
 
 

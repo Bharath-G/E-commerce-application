@@ -1,0 +1,15 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://${user.dir}/config-repo
+          default-label: master # or main depending on your git version
+
+encrypt:
+  key: "MySecretMasterKey123" # Change this to a strong key
