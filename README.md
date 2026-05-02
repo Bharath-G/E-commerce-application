@@ -1,10 +1,8 @@
 # E-Commerce application
 
-# orderservice
-For learning purpose, I am creating this Order Service for an event-driven e-commerce system using Spring Boot, Kafka, and JPA with REST APIs and transaction-based logging.
+For learning purpose, I am creating this E-Commerce-application for an event-driven e-commerce system using Spring Boot, Kafka, and JPA with REST APIs and transaction-based logging.
 
-
-# 🛒 Order Service – E-Commerce Microservices
+# 🛒 E-Commerce Microservices
 
 ## Flow Diagram 
 ## 🔁 Order Processing Flow
@@ -217,3 +215,5 @@ This service demonstrates:
 * Scalable backend architecture
 
 ![E-Commerce Microservice architecture.png](E-Commerce%20Microservice%20architecture.png)
+
+[▶️ STEPS TO RUN THIS APP IN LOCAL](https://github.com/Bharath-G/E-commerce-application/blob/main/How_to_run_locally.md)
