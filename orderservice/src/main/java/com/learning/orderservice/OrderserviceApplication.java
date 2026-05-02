@@ -6,8 +6,8 @@ import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"com.learning.orderservice.repository", "com.learning.logging.repo"})
-@EntityScan(basePackages = {"com.learning.orderservice.entity", "com.learning.logging.entity"})
+@EnableJpaRepositories(basePackages = {"com.learning.orderservice.repository"})
+@EntityScan(basePackages = {"com.learning.orderservice.entity"})
 public class OrderserviceApplication {
 
 	public static void main(String[] args) {

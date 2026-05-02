@@ -1,19 +1,19 @@
 package com.learning.orderservice.service;
 
+import com.learning.events.OrderEvent;
 import com.learning.orderservice.entity.CustomerDetails;
 import com.learning.orderservice.entity.OrderDetails;
 import com.learning.orderservice.mapper.CustomerDetailsMapper;
 import com.learning.orderservice.mapper.OrderDetailsMapper;
 import com.learning.orderservice.model.CustomerDetailsRequest;
-import com.learning.events.OrderEvent;
 import com.learning.orderservice.model.OrderRequest;
 import com.learning.orderservice.model.OrderResponse;
 import com.learning.orderservice.repository.CustomerDetailsRepository;
 import com.learning.orderservice.repository.OrderDetailsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

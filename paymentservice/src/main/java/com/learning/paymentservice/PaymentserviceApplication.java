@@ -6,8 +6,8 @@ import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"com.learning.paymentservice.repository", "com.learning.logging.repo"})
-@EntityScan(basePackages = {"com.learning.paymentservice.entity", "com.learning.logging.entity"})
+@EnableJpaRepositories(basePackages = {"com.learning.paymentservice.repository"})
+@EntityScan(basePackages = {"com.learning.paymentservice.entity"})
 public class PaymentserviceApplication {
 
 	static void main(String[] args) {
