@@ -19,7 +19,7 @@ public class PaymentEventConsumer {
 
     @KafkaListener(
             topics = "payment-events",
-            groupId = "notification-service",
+            groupId = "${spring.kafka.consumer.group-id}",
             concurrency = "3" 
     )
     public void handlePaymentEvent(

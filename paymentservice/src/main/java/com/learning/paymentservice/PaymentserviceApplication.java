@@ -10,11 +10,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = {"com.learning.paymentservice.entity"})
 public class PaymentserviceApplication {
 
-	static void main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(PaymentserviceApplication.class, args);
 	}
 
-	private PaymentserviceApplication(){
+	public PaymentserviceApplication(){
 		//no needed
 	}
 

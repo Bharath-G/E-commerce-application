@@ -23,7 +23,7 @@ public class OrderEventConsumer {
 
     @KafkaListener(
             topics = "order-events",
-            groupId = "payment-service",
+            groupId = "${spring.kafka.consumer.group-id}",
             concurrency = "3" //3 threads for 3 partitions in parallel
     )
     public void handleOrderEvent(
