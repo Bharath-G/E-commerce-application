@@ -1,7 +1,7 @@
 services:
   # --- Infrastructure ---
   kafka-kraft:
-    image: apache/kafka:3.8.0
+    image: apache/kafka:4.1.1
     container_name: kafka-kraft
     ports:
       - "9092:9092"
