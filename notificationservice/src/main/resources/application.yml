@@ -4,5 +4,14 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8888/"
 
-
-
+db:
+  logging:
+    enabled: true             # Enable or disable the logging filter (default: true)
+    log-request-body: true    # Log incoming request bodies (default: true)
+    log-response-body: true   # Log outgoing response bodies (default: true)
+    max-body-size: 10000      # Truncate payloads larger than this size in characters (default: 10000)
+    retention-days: 30        # How many days to keep logs before deletion (default: 30)
+    exclude-paths:            # Endpoints to ignore
+      - /actuator
+      - /swagger
+      - /v3/api-docs
